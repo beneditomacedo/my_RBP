@@ -3,7 +3,7 @@
 
 import argparse
 import os
-from typing import NamedTuple, Tuple
+from typing import NamedTuple, Dict
 
 
 class Args(NamedTuple):
@@ -30,7 +30,7 @@ def get_args() -> Args:
 
 
 # --------------------------------------------------
-def count(args: Args) -> Tuple[int, int, int, int]:
+def count(args: Args) -> Dict[str, int]:
     """ Count DNA bases """
     counts = {'A': 0, 'C': 0, 'G': 0, 'T': 0}
 
@@ -39,8 +39,7 @@ def count(args: Args) -> Tuple[int, int, int, int]:
             counts[base] = 0
         counts[base] += 1
 
-    return (counts.get('A', 0), counts.get('C', 0),
-            counts.get('G', 0), counts.get('T', 0))
+    return counts
 
 
 # --------------------------------------------------
@@ -51,7 +50,8 @@ def main() -> None:
 
     counts = count(args)
 
-    print('{} {} {} {}'.format(*counts))  # splat a tuple
+    print('{} {} {} {}'.format(counts['A'], counts['C'],
+                               counts['G'], counts['T']))
 
 
 # --------------------------------------------------
